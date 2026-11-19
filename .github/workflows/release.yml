@@ -1,0 +1,47 @@
+# Baut bei jedem Versions-Tag (z. B. 1.0.1) das Addon-ZIP, lädt es auf CurseForge hoch
+# (Secrets CF_API_KEY und CF_PROJECT_ID im Environment "Curse Forge") und legt es als GitHub-Release ab.
+#   CurseForge: kompletter Changelog in allen Sprachen untereinander
+#   GitHub:     nur Englisch, nur die neue Version, mit Links zu den anderen Sprachen
+name: Release
+
+on:
+  push:
+    tags:
+      - "[0-9]*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: Curse Forge  # dort liegen die Secrets CF_API_KEY und CF_PROJECT_ID
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Die .toc trägt die Version fest ein (das Spiel zeigt sie auch im Git-Ordner an); sie muss zum Tag passen
+      - name: Version in der .toc prüfen
+        run: |
+          grep -qx "## Version: ${{ github.ref_name }}" *.toc || { echo "::error::## Version in der .toc passt nicht zum Tag ${{ github.ref_name }}"; exit 1; }
+
+      # Fehlt der Abschnitt der neuen Version in einer Sprache, bricht der Release hier ab
+      - name: Changelog-Texte bauen
+        run: |
+          python3 tools/curseforge_text.py changelog "${{ github.ref_name }}" CHANGELOG-CurseForge.txt
+          python3 tools/curseforge_text.py release-notes "${{ github.ref_name }}" RELEASE-NOTES.md
+
+      # Ohne GITHUB_OAUTH lädt der Packager nur zu CurseForge hoch; das GitHub-Release folgt im nächsten Schritt
+      - name: Paket bauen, CurseForge
+        uses: BigWigsMods/packager@v2
+        with:
+          # -n: Dateiname und Label nur mit der Versionsnummer (ohne den automatischen Zusatz "-forever")
+          args: -n "{package-name}-{project-version}:{project-version}" ${{ secrets.CF_PROJECT_ID && format('-p {0}', secrets.CF_PROJECT_ID) || '' }}
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+
+      - name: GitHub-Release
+        run: gh release create "${{ github.ref_name }}" .release/*.zip --title "${{ github.ref_name }}" --notes-file RELEASE-NOTES.md
+        env:
+          GH_TOKEN: ${{ github.token }}

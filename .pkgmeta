@@ -1,0 +1,16 @@
+package-as: SpellRankUp
+
+manual-changelog:
+  filename: CHANGELOG-CurseForge.txt
+  markup-type: text
+
+ignore:
+  - tools
+  - .github
+  - .gitignore
+  - .pkgmeta
+  - .vscode
+  - CHANGELOG-CurseForge.txt
+  - RELEASE-NOTES.md
+  - readme
+  - changelog
