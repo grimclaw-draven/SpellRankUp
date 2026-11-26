@@ -9,9 +9,10 @@ Para **WoW Forever**, no idioma do seu cliente de jogo.
 ## Como funciona
 
 - Quando você aprende um grau maior (subida de nível ou instrutor), todo botão de ação com um grau menor do mesmo feitiço recebe o novo grau.
+- Como ao aprender um feitiço novo: o ícone aparece no instrutor (ou no meio da tela), voa até o botão e o faz brilhar.
 - Nada mais é alterado: outros feitiços, macros e itens ficam onde estão. Um grau menor colocado de propósito continua lá enquanto você não aprender um novo grau desse feitiço.
 - Em combate, os botões são atualizados logo após o combate.
 
 ## Comandos
 
-`/spellrankup on` · `/spellrankup off` · `/spellrankup` (status) – curto: `/sru`
+`/spellrankup on` · `/spellrankup off` · `/spellrankup` (status) · `/spellrankup anim` (animação liga/desliga) – curto: `/sru`

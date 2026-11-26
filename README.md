@@ -9,9 +9,10 @@ For **WoW Forever**, in the language of your game client.
 ## How it works
 
 - When you learn a higher rank (level-up or trainer), every action button with a lower rank of the same spell gets the new rank.
+- Like learning a new spell: the icon appears at the trainer (or in the middle of the screen), flies to the button and makes it light up.
 - Nothing else is touched: other spells, macros and items stay where they are. A lower rank you placed on purpose stays as long as you don't learn a new rank of that spell.
 - In combat, the buttons are updated right after combat.
 
 ## Commands
 
-`/spellrankup on` · `/spellrankup off` · `/spellrankup` (status) – short: `/sru`
+`/spellrankup on` · `/spellrankup off` · `/spellrankup` (status) · `/spellrankup anim` (animation on/off) – short: `/sru`

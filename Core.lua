@@ -120,6 +120,7 @@ function SR.Process()
     for id in pairs(SR.pending) do ids[#ids + 1] = id end
     table.sort(ids, function(a, b) return (SpellRank(a) or 0) < (SpellRank(b) or 0) end)
     wipe(SR.pending)
+    local placed = {} -- [Platz] = Zauber-ID, die zuletzt dort gelandet ist (für die Animation)
     for _, id in ipairs(ids) do
         local done = 0
         for _, slot in ipairs(SR.SlotsFor(id)) do
@@ -128,6 +129,7 @@ function SR.Process()
             if GetCursorInfo() then
                 PlaceAction(slot)
                 done = done + 1
+                placed[slot] = id
             end
             ClearCursor()
         end
@@ -136,6 +138,8 @@ function SR.Process()
             SR.Print(L["%s (%s) liegt jetzt auf der Aktionsleiste (%d×)."]:format(SpellName(id), sub, done))
         end
     end
+    -- Flug-Animation (Animation.lua): rein optisch, darf das Ersetzen nie stören
+    if next(placed) and SR.db.animation ~= false and SR.Animate then pcall(SR.Animate, placed) end
 end
 
 -- Zauberbuch mit dem letzten Stand vergleichen; neue Zauber vormerken
@@ -171,6 +175,7 @@ frame:SetScript("OnEvent", function(self, event, arg1)
         SpellRankUpDB = SpellRankUpDB or {}
         SR.db = SpellRankUpDB
         if SR.db.enabled == nil then SR.db.enabled = true end
+        if SR.db.animation == nil then SR.db.animation = true end
     elseif event == "PLAYER_LOGIN" then
         -- Ausgangsstand: was beim Einloggen schon bekannt ist, gilt nicht als neu gelernt
         local now, count = ReadSpellBook()
@@ -204,6 +209,9 @@ SlashCmdList.SPELLRANKUP = function(msg)
     msg = (msg or ""):lower():match("^%s*(%S*)")
     if msg == "on" then SR.db.enabled = true; Status()
     elseif msg == "off" then SR.db.enabled = false; wipe(SR.pending); Status()
-    elseif msg == "" or msg == "status" then Status(); SR.Print(L["Befehle: /spellrankup on | off"])
-    else SR.Print(L["Befehle: /spellrankup on | off"]) end
+    elseif msg == "anim" then
+        SR.db.animation = SR.db.animation == false
+        SR.Print(SR.db.animation and L["Animation an."] or L["Animation aus."])
+    elseif msg == "" or msg == "status" then Status(); SR.Print(L["Befehle: /spellrankup on | off | anim"])
+    else SR.Print(L["Befehle: /spellrankup on | off | anim"]) end
 end

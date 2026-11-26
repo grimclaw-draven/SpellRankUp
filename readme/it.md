@@ -9,9 +9,10 @@ Per **WoW Forever**, nella lingua del tuo client di gioco.
 ## Come funziona
 
 - Quando apprendi un grado superiore (salita di livello o istruttore), ogni pulsante con un grado inferiore dello stesso incantesimo riceve il nuovo grado.
+- Come quando si apprende un nuovo incantesimo: l’icona appare dall’istruttore (o al centro dello schermo), vola fino al pulsante e lo fa illuminare.
 - Nient’altro viene toccato: altri incantesimi, macro e oggetti restano dove sono. Un grado inferiore messo di proposito resta finché non apprendi un nuovo grado di quell’incantesimo.
 - In combattimento, i pulsanti vengono aggiornati subito dopo il combattimento.
 
 ## Comandi
 
-`/spellrankup on` · `/spellrankup off` · `/spellrankup` (stato) – breve: `/sru`
+`/spellrankup on` · `/spellrankup off` · `/spellrankup` (stato) · `/spellrankup anim` (animazione sì/no) – breve: `/sru`

@@ -9,9 +9,10 @@ Para **WoW Forever**, en el idioma de tu cliente de juego.
 ## Cómo funciona
 
 - Cuando aprendes un rango superior (subida de nivel o instructor), cada botón de acción con un rango inferior del mismo hechizo recibe el nuevo rango.
+- Como al aprender un hechizo nuevo: el icono aparece en el instructor (o en el centro de la pantalla), vuela hasta el botón y lo hace brillar.
 - No se toca nada más: otros hechizos, macros y objetos se quedan donde están. Un rango inferior puesto a propósito se mantiene mientras no aprendas un nuevo rango de ese hechizo.
 - En combate, los botones se actualizan justo después del combate.
 
 ## Comandos
 
-`/spellrankup on` · `/spellrankup off` · `/spellrankup` (estado) – abreviado: `/sru`
+`/spellrankup on` · `/spellrankup off` · `/spellrankup` (estado) · `/spellrankup anim` (animación sí/no) – abreviado: `/sru`
