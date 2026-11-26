@@ -2,7 +2,7 @@
 ## Title: SpellRankUp
 ## Notes: Puts a newly learned spell rank on your action bars in place of the old rank
 ## Notes-deDE: Legt einen neu gelernten Zauberrang anstelle des alten Rangs auf die Aktionsleisten
-## Version: 1.0.0
+## Version: 1.1.0
 ## IconTexture: Interface\Icons\Spell_Holy_MagicalSentry
 ## X-License: GPL-3.0
 ## SavedVariables: SpellRankUpDB
@@ -10,3 +10,4 @@
 Locales.lua
 Translations.lua
 Core.lua
+Animation.lua
